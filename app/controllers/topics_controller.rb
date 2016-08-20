@@ -50,7 +50,7 @@ class TopicsController < ApplicationController
       end
     end
   end
-
+ 
   # DELETE /topics/1
   # DELETE /topics/1.json
   def destroy
@@ -62,9 +62,15 @@ class TopicsController < ApplicationController
   end
 
   def upvote
-    @topic = Topic.find(pramas[:id])
+    @topic = Topic.find(params[:id])
     @topic.votes.create
-    redirect_to(topics.path)
+    redirect_to(topics_path)
+  end
+
+  def downvote
+    @topic = Topic.find(params[:id])
+    @topic.votes.destroy
+    redirect_to(topics_path)
   end
 
   private
